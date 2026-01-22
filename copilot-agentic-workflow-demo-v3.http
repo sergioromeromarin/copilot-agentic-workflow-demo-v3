@@ -1,0 +1,6 @@
+@copilot_agentic_workflow_demo_v3_HostAddress = http://localhost:5087
+
+GET {{copilot_agentic_workflow_demo_v3_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

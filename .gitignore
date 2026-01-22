@@ -1,0 +1,27 @@
+# Build results
+bin/
+obj/
+**/bin/
+**/obj/
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# VS Code
+.vscode/
+
+# Node
+node_modules/
+
+# Coverage/test artifacts
+coverage/
+TestResults/
+*.trx
+*.xml
+
+# OS
+.DS_Store
+Thumbs.db
