@@ -62,6 +62,8 @@ dotnet test --collect:"XPlat Code Coverage"
 
 ## Orquestación de Agentes Copilot
 
+> Nota: este repositorio incluye PRs de ejemplo para disparar el workflow y ver los reportes en **Actions → Artifacts**.
+
 Este proyecto implementa un **workflow automático** que se ejecuta en:
 - ✅ Pull Requests (abiertos, actualizados)
 - ✅ Push a `main`
