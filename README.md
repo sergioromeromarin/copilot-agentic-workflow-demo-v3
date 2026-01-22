@@ -22,9 +22,20 @@ Aplicación ejemplo con API Web minimal en .NET 8, datos en memoria, Swagger y u
 - Navegador moderno
 - (Opcional) `npx serve` u otro servidor estático para el frontend
 
+## Compilar el proyecto
+
+Para compilar todo el proyecto (API + Tests):
+```bash
+dotnet build copilot-agentic-workflow-demo-v3.sln
+```
+
+Para compilar solo la API:
+```bash
+dotnet build copilot-agentic-workflow-demo-v3.csproj
+```
+
 ## Ejecutar API
 ```bash
-cd c:/Users/0012655/copilot-agentic-workflow-demo-v3
 dotnet run
 ```
 La API queda en:
@@ -34,7 +45,7 @@ La API queda en:
 ## Servir el frontend (HTML/JS)
 En otra terminal:
 ```bash
-cd c:/Users/0012655/copilot-agentic-workflow-demo-v3/frontend
+cd frontend
 npx serve -l 5500
 ```
 Abrir en el navegador: http://localhost:5500
@@ -51,12 +62,16 @@ Abrir en el navegador: http://localhost:5500
 El proyecto incluye tests xUnit en `copilot-agentic-workflow-demo-v3.Tests/`:
 
 ```bash
-cd copilot-agentic-workflow-demo-v3.Tests
-dotnet test --collect:"XPlat Code Coverage"
+dotnet test copilot-agentic-workflow-demo-v3.sln
+```
+
+Para ejecutar con cobertura de código:
+```bash
+dotnet test copilot-agentic-workflow-demo-v3.sln --collect:"XPlat Code Coverage"
 ```
 
 **Tests disponibles**:
-- ✅ 10 tests para CRUD completo de Producto
+- ✅ 9 tests para CRUD completo de Producto
 - ✅ Happy path, validaciones, errores esperados
 - ✅ Integración con `WebApplicationFactory`
 
@@ -144,7 +159,7 @@ copilot-agentic-workflow-demo-v3/
 
 ## Próximos pasos
 
-- [ ] Ajustar dependencias xUnit para ejecución completa
+- [x] ~~Ajustar dependencias xUnit para ejecución completa~~ (Completado)
 - [ ] Agregar más tests de integración
 - [ ] Implementar persistencia (opcional)
 - [ ] Extender agentes con análisis de seguridad
