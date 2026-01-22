@@ -4,6 +4,8 @@ VisualStudioVersion = 17.5.2.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "copilot-agentic-workflow-demo-v3", "copilot-agentic-workflow-demo-v3.csproj", "{AEDC9474-4067-B98A-E080-D6F236289FAF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "copilot-agentic-workflow-demo-v3.Tests", "copilot-agentic-workflow-demo-v3.Tests\copilot-agentic-workflow-demo-v3.Tests.csproj", "{B1E5D8F9-5078-4C2A-9B3E-1A2F3C4D5E6F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -14,6 +16,10 @@ Global
 		{AEDC9474-4067-B98A-E080-D6F236289FAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AEDC9474-4067-B98A-E080-D6F236289FAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AEDC9474-4067-B98A-E080-D6F236289FAF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1E5D8F9-5078-4C2A-9B3E-1A2F3C4D5E6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1E5D8F9-5078-4C2A-9B3E-1A2F3C4D5E6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1E5D8F9-5078-4C2A-9B3E-1A2F3C4D5E6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1E5D8F9-5078-4C2A-9B3E-1A2F3C4D5E6F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
