@@ -56,7 +56,7 @@ jobs:
     name: Revisión Calidad Código
     runs-on: ubuntu-latest
     needs: build-and-test
-    
+
     steps:
       - name: Checkout código
         uses: actions/checkout@v4
@@ -73,34 +73,24 @@ jobs:
           fi
           echo "files=$(cat changed_files.txt | tr '\n' ' ')" >> $GITHUB_OUTPUT
 
-      - name: Ejecutar agente code-quality (simulado)
+      - name: Ejecutar agente code-quality
         run: |
-          echo "## 🔍 Revisión de Calidad de Código" > code-quality-report.md
-          echo "" >> code-quality-report.md
-          echo "Archivos analizados: ${{ steps.changed-files.outputs.files }}" >> code-quality-report.md
-          echo "" >> code-quality-report.md
-          echo "### Críticos" >> code-quality-report.md
-          echo "- Ninguno" >> code-quality-report.md
-          echo "" >> code-quality-report.md
-          echo "### Altos" >> code-quality-report.md
-          echo "- Ninguno" >> code-quality-report.md
-          echo "" >> code-quality-report.md
-          echo "### Resumen" >> code-quality-report.md
-          echo "✅ El código cumple con las mejores prácticas .NET" >> code-quality-report.md
-          echo "" >> code-quality-report.md
-          echo "_Revisado por: code-quality agent_" >> code-quality-report.md
+          docker run --rm \
+            -v ${{ github.workspace }}:/workspace \
+            my-docker-image/code-quality-agent \
+            --files "${{ steps.changed-files.outputs.files }}"
 
       - name: Guardar reporte calidad
         uses: actions/upload-artifact@v4
         with:
           name: code-quality-report
-          path: code-quality-report.md
+          path: /workspace/code-quality-report.md
 
   test-coverage-analysis:
     name: Análisis Cobertura Tests
     runs-on: ubuntu-latest
     needs: build-and-test
-    
+
     steps:
       - name: Checkout código
         uses: actions/checkout@v4
@@ -111,28 +101,18 @@ jobs:
           name: test-results
           path: ./coverage
 
-      - name: Ejecutar agente test-validator (simulado)
+      - name: Ejecutar agente test-validator
         run: |
-          echo "## 🧪 Análisis de Cobertura de Tests" > test-coverage-report.md
-          echo "" >> test-coverage-report.md
-          echo "### Estado del proyecto de tests" >> test-coverage-report.md
-          echo "- ✅ Proyecto xUnit: \`copilot-agentic-workflow-demo-v3.Tests\`" >> test-coverage-report.md
-          echo "- ⚠️  Tests requieren ajuste de dependencias" >> test-coverage-report.md
-          echo "" >> test-coverage-report.md
-          echo "### Tests unitarios disponibles" >> test-coverage-report.md
-          echo "- \`ProductoEndpointsTests.cs\`: 10 tests para CRUD completo" >> test-coverage-report.md
-          echo "" >> test-coverage-report.md
-          echo "### Recomendaciones" >> test-coverage-report.md
-          echo "1. Verificar instalación correcta de paquetes xUnit" >> test-coverage-report.md
-          echo "2. Ejecutar \`dotnet test\` localmente para validar" >> test-coverage-report.md
-          echo "" >> test-coverage-report.md
-          echo "_Revisado por: test-validator agent_" >> test-coverage-report.md
+          docker run --rm \
+            -v ${{ github.workspace }}:/workspace \
+            my-docker-image/test-validator-agent \
+            --test-results /workspace/coverage/test-results.trx
 
       - name: Guardar reporte cobertura
         uses: actions/upload-artifact@v4
         with:
           name: test-coverage-report
-          path: test-coverage-report.md
+          path: /workspace/test-coverage-report.md
 
   generate-html-documentation:
     name: Generar Documentación HTML
