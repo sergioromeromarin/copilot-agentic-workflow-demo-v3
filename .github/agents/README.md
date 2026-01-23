@@ -19,7 +19,7 @@ Son **especializaciones de GitHub Copilot** con instrucciones y contexto especí
 | Agente | Propósito | Entrada | Salida |
 |--------|-----------|---------|--------|
 | **doc-generator** | Documenta cambios en HTML consultable | Diff de PR/commit, test results | HTML con resumen, archivos modificados, tests, cobertura |
-| **code-quality** | Revisa calidad y mejores prácticas | Archivos modificados (.cs, .csproj) | Markdown con issues y sugerencias |
+| **code-quality** | Revisa calidad, seguridad y mejores prácticas | Archivos modificados (.cs, .csproj) | Markdown con issues categorizados por severidad y tipo |
 | **test-validator** | Valida cobertura de tests | Archivos modificados + proyecto xUnit | Markdown con gaps y tests sugeridos |
 
 ## Flujo de ejecución
