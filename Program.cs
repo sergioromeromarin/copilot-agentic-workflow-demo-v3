@@ -7,8 +7,8 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowFrontend", policy =>
     {
         policy.WithOrigins("http://localhost:5500")
-              .AllowAnyHeader()
-              .AllowAnyMethod();
+              .WithHeaders("Content-Type")
+              .WithMethods("GET", "POST", "PUT", "DELETE");
     });
 });
 
@@ -50,8 +50,12 @@ app.MapPost("/api/productos", (ProductoCreate input) =>
     var validation = Validar(input.Nombre, input.Precio, input.Stock);
     if (validation is not null) return validation;
 
+    var nombreTrimmed = input.Nombre?.Trim() ?? "";
+    if (string.IsNullOrWhiteSpace(nombreTrimmed))
+        return Results.BadRequest(new { error = "El nombre no puede estar vacío después de eliminar espacios." });
+
     var nuevoId = productos.Any() ? productos.Max(p => p.Id) + 1 : 1;
-    var producto = new Producto(nuevoId, input.Nombre.Trim(), input.Precio, input.Stock);
+    var producto = new Producto(nuevoId, nombreTrimmed, input.Precio, input.Stock);
     productos.Add(producto);
     return Results.Created($"/api/productos/{producto.Id}", producto);
 })
@@ -66,9 +70,13 @@ app.MapPut("/api/productos/{id:int}", (int id, ProductoUpdate input) =>
     var producto = productos.FirstOrDefault(p => p.Id == id);
     if (producto is null) return Results.NotFound();
 
+    var nombreTrimmed = input.Nombre?.Trim() ?? "";
+    if (string.IsNullOrWhiteSpace(nombreTrimmed))
+        return Results.BadRequest(new { error = "El nombre no puede estar vacío después de eliminar espacios." });
+
     var actualizado = producto with
     {
-        Nombre = input.Nombre.Trim(),
+        Nombre = nombreTrimmed,
         Precio = input.Precio,
         Stock = input.Stock
     };
