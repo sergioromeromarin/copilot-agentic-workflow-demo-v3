@@ -90,19 +90,45 @@
         tabla.innerHTML = '';
         data.forEach(p => {
           const tr = document.createElement('tr');
-          tr.innerHTML = `
-            <td>${p.id}</td>
-            <td>${p.nombre}</td>
-            <td>${p.precio}</td>
-            <td>${p.stock}</td>
-            <td class="actions">
-              <button data-id="${p.id}" class="editar">Editar</button>
-              <button data-id="${p.id}" class="eliminar">Eliminar</button>
-            </td>`;
+          
+          const tdId = document.createElement('td');
+          tdId.textContent = p.id;
+          
+          const tdNombre = document.createElement('td');
+          tdNombre.textContent = p.nombre;
+          
+          const tdPrecio = document.createElement('td');
+          tdPrecio.textContent = p.precio;
+          
+          const tdStock = document.createElement('td');
+          tdStock.textContent = p.stock;
+          
+          const tdActions = document.createElement('td');
+          tdActions.className = 'actions';
+          
+          const btnEditar = document.createElement('button');
+          btnEditar.textContent = 'Editar';
+          btnEditar.className = 'editar';
+          btnEditar.setAttribute('data-id', p.id);
+          
+          const btnEliminar = document.createElement('button');
+          btnEliminar.textContent = 'Eliminar';
+          btnEliminar.className = 'eliminar';
+          btnEliminar.setAttribute('data-id', p.id);
+          
+          tdActions.appendChild(btnEditar);
+          tdActions.appendChild(btnEliminar);
+          
+          tr.appendChild(tdId);
+          tr.appendChild(tdNombre);
+          tr.appendChild(tdPrecio);
+          tr.appendChild(tdStock);
+          tr.appendChild(tdActions);
+          
           tabla.appendChild(tr);
         });
       } catch (e) {
-        setError(e.message);
+        setError('Error al cargar productos');
       }
     }
 
@@ -128,7 +154,7 @@
         formCrear.reset();
         await cargarProductos();
       } catch (e) {
-        setError(e.message);
+        setError('Error al crear el producto');
       }
     });
 
@@ -151,7 +177,7 @@
         setMensaje('Producto eliminado');
         await cargarProductos();
       } catch (e) {
-        setError(e.message);
+        setError('Error al eliminar el producto');
       }
     }
 
@@ -166,7 +192,7 @@
         editarPrecio.value = p.precio;
         editarStock.value = p.stock;
       } catch (e) {
-        setError(e.message);
+        setError('Error al obtener el producto');
       }
     }
 
@@ -193,7 +219,7 @@
         formEditar.reset();
         await cargarProductos();
       } catch (e) {
-        setError(e.message);
+        setError('Error al actualizar el producto');
       }
     });
 
