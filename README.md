@@ -77,8 +77,11 @@ Este proyecto implementa un **workflow automático** que se ejecuta en:
 
 2. **code-quality** ([ver definición](.github/agents/code-quality.agent.md))
    - Revisa mejores prácticas .NET (null-safety, naming, async patterns)
+   - Analiza seguridad (injection attacks, CORS, secrets management)
    - Detecta violaciones SOLID y problemas de performance
-   - Output: Markdown con issues y sugerencias
+   - Evalúa métricas de código (complejidad, duplicación)
+   - Valida logging, API design y gestión de configuración
+   - Output: Markdown con issues categorizados por severidad y tipo
 
 3. **test-validator** ([ver definición](.github/agents/test-validator.agent.md))
    - Analiza cobertura de tests existentes
